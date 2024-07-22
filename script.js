@@ -1,3 +1,15 @@
+let currentPlayer = 0;
+let players = [];
+
+document.getElementById('startGameButton').addEventListener('click', function() {
+    const numPlayers = document.getElementById('numPlayers').value;
+    setupPlayers(numPlayers);
+    document.getElementById('playerSetup').classList.add('hidden');
+    document.getElementById('game').classList.remove('hidden');
+    updateCurrentPlayer();
+    updateScores();
+});
+
 document.getElementById('rollButton').addEventListener('click', function() {
     const result = Math.floor(Math.random() * 6) + 1;
     document.getElementById('result').textContent = `You rolled a ${result}!`;
@@ -5,6 +17,9 @@ document.getElementById('rollButton').addEventListener('click', function() {
     dice.className = `dice shake`;
     resetDots();
     showDots(result);
+
+    players[currentPlayer].score += result;
+    currentPlayer = (currentPlayer + 1) % players.length;
 
     setTimeout(() => {
         dice.classList.remove('shake');
@@ -15,7 +30,31 @@ document.getElementById('rollButton').addEventListener('click', function() {
     setTimeout(() => {
         container.style.transform = 'scale(1)';
     }, 300);
+
+    updateCurrentPlayer();
+    updateScores();
 });
+
+function setupPlayers(num) {
+    players = [];
+    for (let i = 0; i < num; i++) {
+        players.push({ id: i + 1, score: 0 });
+    }
+}
+
+function updateCurrentPlayer() {
+    document.getElementById('currentPlayer').textContent = `Player ${players[currentPlayer].id}'s turn`;
+}
+
+function updateScores() {
+    const playersScores = document.getElementById('playersScores');
+    playersScores.innerHTML = '';
+    players.forEach(player => {
+        const playerScore = document.createElement('div');
+        playerScore.textContent = `Player ${player.id}: ${player.score}`;
+        playersScores.appendChild(playerScore);
+    });
+}
 
 function resetDots() {
     const dots = document.querySelectorAll('.dot');
