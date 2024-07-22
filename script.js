@@ -83,6 +83,33 @@ function startGame(numDice, numSides) {
         diceContainer.appendChild(die);
     }
 }
+//function setupPlayers(numPlayers) {
+  //  players = [];
+    //for (let i = 0; i < numPlayers; i++) {
+      //  const name = document.getElementById(`player${i}`).value;
+        //if (!name) {
+          //  alert('Please enter names for all players.');
+            //return;
+        //}
+        //players.push({ name, scores: [] });
+    //}
+
+    //document.getElementById('playerSetup').classList.add('hidden');
+    //document.getElementById('game').classList.remove('hidden');
+    //document.getElementById('currentPlayer').textContent = `Current Player: ${players[currentPlayerIndex].name}`;
+//}
+
+//function startGame(numDice, numSides) {
+  //  const diceContainer = document.getElementById('diceContainer');
+    //diceContainer.innerHTML = '';
+
+    //for (let i = 0; i < numDice; i++) {
+     //   const die = document.createElement('div');
+       // die.classList.add('dice');
+        //die.setAttribute('id', `dice${i + 1}`);
+        //diceContainer.appendChild(die);
+    //}
+//}
 
 function rollDice() {
     const numDice = document.getElementById('diceContainer').children.length;

@@ -82,14 +82,14 @@ header h1 {
 }
 
 .dot1 { top: 50%; left: 50%; transform: translate(-50%, -50%); }
-.dot2 { top: 25%; left: 25%; }
-.dot3 { top: 25%; left: 75%; }
-.dot4 { top: 75%; left: 25%; }
-.dot5 { top: 75%; left: 75%; }
-.dot6 { top: 25%; left: 50%; }
-.dot7 { top: 50%; left: 25%; }
-.dot8 { top: 50%; left: 75%; }
-.dot9 { top: 75%; left: 50%; }
+.dot2 { top: 25%; left: 25%; transform: translate(-50%, -50%); }
+.dot3 { top: 25%; left: 75%; transform: translate(-50%, -50%); }
+.dot4 { top: 75%; left: 25%; transform: translate(-50%, -50%); }
+.dot5 { top: 75%; left: 75%; transform: translate(-50%, -50%); }
+.dot6 { top: 25%; left: 50%; transform: translate(-50%, -50%); }
+.dot7 { top: 50%; left: 25%; transform: translate(-50%, -50%); }
+.dot8 { top: 50%; left: 75%; transform: translate(-50%, -50%); }
+.dot9 { top: 75%; left: 50%; transform: translate(-50%, -50%); }
 
 .dice1 .dot { top: 50%; left: 50%; transform: translate(-50%, -50%); }
 .dice2 .dot1, .dice2 .dot5 { top: 25%; left: 25%; }
@@ -118,6 +118,7 @@ header h1 {
 .dice6 .dot9, .dice6 .dot6 { top: 75%; left: 50%; }
 .dice6 .dot10, .dice6 .dot11 { top: 75%; left: 75%; }
 
+/* Dice Shake Animation */
 .shake {
     animation: shake 0.5s ease;
 }
