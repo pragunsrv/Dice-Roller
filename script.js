@@ -2,14 +2,14 @@ document.getElementById('rollButton').addEventListener('click', function() {
     const result = Math.floor(Math.random() * 6) + 1;
     document.getElementById('result').textContent = `You rolled a ${result}!`;
     const dice = document.getElementById('dice');
-    dice.className = `dice shake ${getClassName(result)}`;
+    dice.className = `dice shake`;
+    resetDots();
+    showDots(result);
 
-    // Adding shake animation
     setTimeout(() => {
         dice.classList.remove('shake');
     }, 500);
 
-    // Adding a visual effect to the container
     const container = document.querySelector('.container');
     container.style.transform = 'scale(1.05)';
     setTimeout(() => {
@@ -17,13 +17,55 @@ document.getElementById('rollButton').addEventListener('click', function() {
     }, 300);
 });
 
-function getClassName(result) {
+function resetDots() {
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach(dot => {
+        dot.classList.add('hidden');
+    });
+}
+
+function showDots(result) {
+    const dot1 = document.getElementById('dot1');
+    const dot2 = document.getElementById('dot2');
+    const dot3 = document.getElementById('dot3');
+    const dot4 = document.getElementById('dot4');
+    const dot5 = document.getElementById('dot5');
+    const dot6 = document.getElementById('dot6');
+    const dot7 = document.getElementById('dot7');
+
     switch(result) {
-        case 1: return 'one';
-        case 2: return 'two';
-        case 3: return 'three';
-        case 4: return 'four';
-        case 5: return 'five';
-        case 6: return 'six';
+        case 1:
+            dot4.classList.remove('hidden');
+            break;
+        case 2:
+            dot1.classList.remove('hidden');
+            dot7.classList.remove('hidden');
+            break;
+        case 3:
+            dot1.classList.remove('hidden');
+            dot4.classList.remove('hidden');
+            dot7.classList.remove('hidden');
+            break;
+        case 4:
+            dot1.classList.remove('hidden');
+            dot3.classList.remove('hidden');
+            dot5.classList.remove('hidden');
+            dot7.classList.remove('hidden');
+            break;
+        case 5:
+            dot1.classList.remove('hidden');
+            dot3.classList.remove('hidden');
+            dot4.classList.remove('hidden');
+            dot5.classList.remove('hidden');
+            dot7.classList.remove('hidden');
+            break;
+        case 6:
+            dot1.classList.remove('hidden');
+            dot3.classList.remove('hidden');
+            dot5.classList.remove('hidden');
+            dot7.classList.remove('hidden');
+            dot2.classList.remove('hidden');
+            dot6.classList.remove('hidden');
+            break;
     }
 }

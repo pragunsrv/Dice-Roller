@@ -51,10 +51,6 @@ button:hover {
     height: 100px;
     background-color: white;
     border: 2px solid black;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
     position: relative;
     transition: transform 0.3s ease;
 }
@@ -67,97 +63,16 @@ button:hover {
     position: absolute;
 }
 
-.dice.one .dot:nth-child(1) {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+#dot1 { top: 10%; left: 10%; }
+#dot2 { top: 10%; left: 50%; transform: translateX(-50%); }
+#dot3 { top: 10%; right: 10%; }
+#dot4 { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+#dot5 { bottom: 10%; left: 10%; }
+#dot6 { bottom: 10%; left: 50%; transform: translateX(-50%); }
+#dot7 { bottom: 10%; right: 10%; }
 
-.dice.two .dot:nth-child(1) {
-    top: 25%;
-    left: 25%;
-}
-.dice.two .dot:nth-child(2) {
-    bottom: 25%;
-    right: 25%;
-}
-
-.dice.three .dot:nth-child(1) {
-    top: 25%;
-    left: 25%;
-}
-.dice.three .dot:nth-child(2) {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-.dice.three .dot:nth-child(3) {
-    bottom: 25%;
-    right: 25%;
-}
-
-.dice.four .dot:nth-child(1) {
-    top: 25%;
-    left: 25%;
-}
-.dice.four .dot:nth-child(2) {
-    top: 25%;
-    right: 25%;
-}
-.dice.four .dot:nth-child(3) {
-    bottom: 25%;
-    left: 25%;
-}
-.dice.four .dot:nth-child(4) {
-    bottom: 25%;
-    right: 25%;
-}
-
-.dice.five .dot:nth-child(1) {
-    top: 25%;
-    left: 25%;
-}
-.dice.five .dot:nth-child(2) {
-    top: 25%;
-    right: 25%;
-}
-.dice.five .dot:nth-child(3) {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-.dice.five .dot:nth-child(4) {
-    bottom: 25%;
-    left: 25%;
-}
-.dice.five .dot:nth-child(5) {
-    bottom: 25%;
-    right: 25%;
-}
-
-.dice.six .dot:nth-child(1) {
-    top: 25%;
-    left: 25%;
-}
-.dice.six .dot:nth-child(2) {
-    top: 25%;
-    right: 25%;
-}
-.dice.six .dot:nth-child(3) {
-    top: 50%;
-    left: 25%;
-}
-.dice.six .dot:nth-child(4) {
-    top: 50%;
-    right: 25%;
-}
-.dice.six .dot:nth-child(5) {
-    bottom: 25%;
-    left: 25%;
-}
-.dice.six .dot:nth-child(6) {
-    bottom: 25%;
-    right: 25%;
+.hidden {
+    display: none;
 }
 
 .shake {
