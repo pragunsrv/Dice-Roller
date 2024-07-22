@@ -1,13 +1,22 @@
-let currentPlayer = 0;
+let currentPlayerIndex = 0;
 let players = [];
 
+document.getElementById('numPlayers').addEventListener('change', function() {
+    generatePlayerInputs();
+});
+
 document.getElementById('startGameButton').addEventListener('click', function() {
-    const numPlayers = document.getElementById('numPlayers').value;
+    const numPlayers = parseInt(document.getElementById('numPlayers').value, 10);
+    if (numPlayers < 2 || numPlayers > 6) {
+        alert('Please select between 2 and 6 players.');
+        return;
+    }
     setupPlayers(numPlayers);
     document.getElementById('playerSetup').classList.add('hidden');
     document.getElementById('game').classList.remove('hidden');
     updateCurrentPlayer();
     updateScores();
+    updateHistory();
 });
 
 document.getElementById('rollButton').addEventListener('click', function() {
@@ -18,8 +27,9 @@ document.getElementById('rollButton').addEventListener('click', function() {
     resetDots();
     showDots(result);
 
-    players[currentPlayer].score += result;
-    currentPlayer = (currentPlayer + 1) % players.length;
+    players[currentPlayerIndex].score += result;
+    players[currentPlayerIndex].history.push(result);
+    currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
 
     setTimeout(() => {
         dice.classList.remove('shake');
@@ -33,17 +43,35 @@ document.getElementById('rollButton').addEventListener('click', function() {
 
     updateCurrentPlayer();
     updateScores();
+    updateHistory();
 });
+
+function generatePlayerInputs() {
+    const numPlayers = parseInt(document.getElementById('numPlayers').value, 10);
+    const playerNamesDiv = document.getElementById('playerNames');
+    playerNamesDiv.innerHTML = '';
+
+    for (let i = 0; i < numPlayers; i++) {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = `Player ${i + 1} Name`;
+        input.id = `playerName${i + 1}`;
+        playerNamesDiv.appendChild(input);
+        playerNamesDiv.appendChild(document.createElement('br')); // Add a line break for better readability
+    }
+}
 
 function setupPlayers(num) {
     players = [];
     for (let i = 0; i < num; i++) {
-        players.push({ id: i + 1, score: 0 });
+        const input = document.getElementById(`playerName${i + 1}`);
+        const name = input ? input.value.trim() || `Player ${i + 1}` : `Player ${i + 1}`;
+        players.push({ name: name, score: 0, history: [] });
     }
 }
 
 function updateCurrentPlayer() {
-    document.getElementById('currentPlayer').textContent = `Player ${players[currentPlayer].id}'s turn`;
+    document.getElementById('currentPlayer').textContent = `${players[currentPlayerIndex].name}'s turn`;
 }
 
 function updateScores() {
@@ -51,8 +79,18 @@ function updateScores() {
     playersScores.innerHTML = '';
     players.forEach(player => {
         const playerScore = document.createElement('div');
-        playerScore.textContent = `Player ${player.id}: ${player.score}`;
+        playerScore.textContent = `${player.name}: ${player.score}`;
         playersScores.appendChild(playerScore);
+    });
+}
+
+function updateHistory() {
+    const historyDiv = document.getElementById('history');
+    historyDiv.innerHTML = '';
+    players.forEach(player => {
+        const history = document.createElement('div');
+        history.textContent = `${player.name}'s Rolls: ${player.history.join(', ')}`;
+        historyDiv.appendChild(history);
     });
 }
 
