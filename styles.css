@@ -1,86 +1,200 @@
-/* General styles */
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+    padding: 20px;
+    background-color: #f0f0f0;
 }
 
-.container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+h1 {
+    margin-bottom: 20px;
 }
 
 .hidden {
     display: none;
 }
 
-input[type="number"], input[type="text"], button {
-    margin: 10px;
+#playerSetup, #game {
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Dice styles */
-.dice-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-}
-
+/* Dice Styles */
 .dice {
     width: 100px;
     height: 100px;
-    background: white;
-    border: 2px solid #333;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: inline-block;
     position: relative;
-    margin: 0 10px;
+    background-color: #fff;
+    border: 2px solid #000;
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    transform: rotateX(0) rotateY(0); /* Add this for rotation effect */
+    transition: transform 0.5s ease; /* Smooth transition for rotation */
 }
 
+.dice.shake {
+    animation: shake 0.5s ease;
+}
+
+/* Dot Styles */
 .dot {
+    position: absolute;
     width: 20px;
     height: 20px;
-    background: black;
+    background-color: black;
     border-radius: 50%;
-    position: absolute;
-    display: none;
 }
 
-/* Dot positions for dice */
-.dice .dot {
-    display: block;
+/* Dice Dot Positions */
+.dice1 .dot { /* Centered dots for dice with 1 dot */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-#dice1 #dot1-1 { top: 10px; left: 10px; }
-#dice1 #dot1-2 { top: 10px; right: 10px; }
-#dice1 #dot1-3 { top: 50%; left: 50%; transform: translate(-50%, -50%); }
-#dice1 #dot1-4 { bottom: 10px; left: 10px; }
-#dice1 #dot1-5 { bottom: 10px; right: 10px; }
-#dice1 #dot1-6 { top: 10px; left: 50%; transform: translateX(-50%); }
-#dice1 #dot1-7 { bottom: 10px; left: 50%; transform: translateX(-50%); }
+.dice2 .dot { /* Centered dots for dice with 2 dots */
+    top: 20%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
 
-#dice2 #dot2-1 { top: 10px; left: 10px; }
-#dice2 #dot2-2 { top: 10px; right: 10px; }
-#dice2 #dot2-3 { top: 50%; left: 50%; transform: translate(-50%, -50%); }
-#dice2 #dot2-4 { bottom: 10px; left: 10px; }
-#dice2 #dot2-5 { bottom: 10px; right: 10px; }
-#dice2 #dot2-6 { top: 10px; left: 50%; transform: translateX(-50%); }
-#dice2 #dot2-7 { bottom: 10px; left: 50%; transform: translateX(-50%); }
+.dice2 .dot:nth-child(2) {
+    top: 80%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+}
 
-/* Shake animation */
+.dice3 .dot { /* Centered dots for dice with 3 dots */
+    top: 20%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
+
+.dice3 .dot:nth-child(2) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.dice3 .dot:nth-child(3) {
+    top: 80%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+}
+
+.dice4 .dot { /* Centered dots for dice with 4 dots */
+    top: 20%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
+
+.dice4 .dot:nth-child(2) {
+    top: 20%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+}
+
+.dice4 .dot:nth-child(3) {
+    top: 80%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
+
+.dice4 .dot:nth-child(4) {
+    top: 80%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+}
+
+.dice5 .dot { /* Centered dots for dice with 5 dots */
+    top: 20%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
+
+.dice5 .dot:nth-child(2) {
+    top: 20%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+}
+
+.dice5 .dot:nth-child(3) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.dice5 .dot:nth-child(4) {
+    top: 80%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
+
+.dice5 .dot:nth-child(5) {
+    top: 80%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+}
+
+.dice6 .dot { /* Centered dots for dice with 6 dots */
+    top: 20%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
+
+.dice6 .dot:nth-child(2) {
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.dice6 .dot:nth-child(3) {
+    top: 20%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+}
+
+.dice6 .dot:nth-child(4) {
+    top: 80%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
+
+.dice6 .dot:nth-child(5) {
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.dice6 .dot:nth-child(6) {
+    top: 80%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+}
+
+/* Dice Shake Animation */
 @keyframes shake {
-    0% { transform: rotate(0deg); }
-    50% { transform: rotate(10deg); }
-    100% { transform: rotate(0deg); }
+    0% { transform: rotateX(0) rotateY(0); }
+    25% { transform: rotateX(10deg) rotateY(10deg); }
+    50% { transform: rotateX(-10deg) rotateY(-10deg); }
+    75% { transform: rotateX(10deg) rotateY(10deg); }
+    100% { transform: rotateX(0) rotateY(0); }
 }
 
-.shake {
-    animation: shake 0.5s;
+/* Additional Styles for Layout and Visibility */
+#result {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+#playersScores, #history {
+    margin-top: 20px;
+    text-align: left;
 }
