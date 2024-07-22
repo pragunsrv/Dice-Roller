@@ -20,19 +20,33 @@ document.getElementById('startGameButton').addEventListener('click', function() 
 });
 
 document.getElementById('rollButton').addEventListener('click', function() {
-    const result = Math.floor(Math.random() * 6) + 1;
-    document.getElementById('result').textContent = `You rolled a ${result}!`;
-    const dice = document.getElementById('dice');
-    dice.className = `dice shake`;
-    resetDots();
-    showDots(result);
+    const result1 = Math.floor(Math.random() * 6) + 1;
+    const result2 = Math.floor(Math.random() * 6) + 1;
+    const totalResult = result1 + result2;
 
-    players[currentPlayerIndex].score += result;
-    players[currentPlayerIndex].history.push(result);
+    document.getElementById('result').textContent = `You rolled a ${result1} and ${result2} (Total: ${totalResult})!`;
+
+    const dice1 = document.getElementById('dice1');
+    const dice2 = document.getElementById('dice2');
+
+    // Add shake class for animation
+    dice1.classList.add('shake');
+    dice2.classList.add('shake');
+
+    // Reset dots and show appropriate ones
+    resetDots(1);
+    resetDots(2);
+    showDots(result1, 1);
+    showDots(result2, 2);
+
+    // Update player score and history
+    players[currentPlayerIndex].score += totalResult;
+    players[currentPlayerIndex].history.push({ dice1: result1, dice2: result2 });
     currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
 
     setTimeout(() => {
-        dice.classList.remove('shake');
+        dice1.classList.remove('shake');
+        dice2.classList.remove('shake');
     }, 500);
 
     const container = document.querySelector('.container');
@@ -89,60 +103,58 @@ function updateHistory() {
     historyDiv.innerHTML = '';
     players.forEach(player => {
         const history = document.createElement('div');
-        history.textContent = `${player.name}'s Rolls: ${player.history.join(', ')}`;
+        history.textContent = `${player.name}'s Rolls: ${player.history.map(r => `(${r.dice1}, ${r.dice2})`).join(', ')}`;
         historyDiv.appendChild(history);
     });
 }
 
-function resetDots() {
-    const dots = document.querySelectorAll('.dot');
+function resetDots(diceNumber) {
+    const dots = document.querySelectorAll(`#dice${diceNumber} .dot`);
     dots.forEach(dot => {
-        dot.classList.add('hidden');
+        dot.style.display = 'none';
     });
 }
 
-function showDots(result) {
-    const dot1 = document.getElementById('dot1');
-    const dot2 = document.getElementById('dot2');
-    const dot3 = document.getElementById('dot3');
-    const dot4 = document.getElementById('dot4');
-    const dot5 = document.getElementById('dot5');
-    const dot6 = document.getElementById('dot6');
-    const dot7 = document.getElementById('dot7');
+function showDots(result, diceNumber) {
+    const dice = document.getElementById(`dice${diceNumber}`);
+    const dots = dice.querySelectorAll('.dot');
+
+    // Reset all dots to hidden
+    dots.forEach(dot => dot.style.display = 'none');
 
     switch(result) {
         case 1:
-            dot4.classList.remove('hidden');
+            dots[2].style.display = 'block';
             break;
         case 2:
-            dot1.classList.remove('hidden');
-            dot7.classList.remove('hidden');
+            dots[0].style.display = 'block';
+            dots[4].style.display = 'block';
             break;
         case 3:
-            dot1.classList.remove('hidden');
-            dot4.classList.remove('hidden');
-            dot7.classList.remove('hidden');
+            dots[0].style.display = 'block';
+            dots[2].style.display = 'block';
+            dots[4].style.display = 'block';
             break;
         case 4:
-            dot1.classList.remove('hidden');
-            dot3.classList.remove('hidden');
-            dot5.classList.remove('hidden');
-            dot7.classList.remove('hidden');
+            dots[0].style.display = 'block';
+            dots[1].style.display = 'block';
+            dots[3].style.display = 'block';
+            dots[4].style.display = 'block';
             break;
         case 5:
-            dot1.classList.remove('hidden');
-            dot3.classList.remove('hidden');
-            dot4.classList.remove('hidden');
-            dot5.classList.remove('hidden');
-            dot7.classList.remove('hidden');
+            dots[0].style.display = 'block';
+            dots[1].style.display = 'block';
+            dots[2].style.display = 'block';
+            dots[3].style.display = 'block';
+            dots[4].style.display = 'block';
             break;
         case 6:
-            dot1.classList.remove('hidden');
-            dot3.classList.remove('hidden');
-            dot5.classList.remove('hidden');
-            dot7.classList.remove('hidden');
-            dot2.classList.remove('hidden');
-            dot6.classList.remove('hidden');
+            dots[0].style.display = 'block';
+            dots[1].style.display = 'block';
+            dots[2].style.display = 'block';
+            dots[3].style.display = 'block';
+            dots[4].style.display = 'block';
+            dots[5].style.display = 'block';
             break;
     }
 }
