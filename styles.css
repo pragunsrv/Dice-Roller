@@ -1,218 +1,54 @@
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
     margin: 0;
-    padding: 20px;
+    padding: 0;
     background-color: #f0f0f0;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-h1 {
-    margin-bottom: 20px;
-}
-
-.hidden {
-    display: none;
-}
-
-#playerSetup, #game {
-    margin: 20px auto;
-    max-width: 600px;
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Dice Styles */
-.dice {
-    width: 100px;
-    height: 100px;
-    display: inline-block;
-    position: relative;
-    background-color: #fff;
-    border: 2px solid #000;
-    border-radius: 10px;
-    margin: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    transform: rotateX(0) rotateY(0);
-    transition: transform 0.5s ease;
-}
-
-.dice.shake {
-    animation: shake 0.5s ease;
-}
-
-/* Dot Styles */
-.dot {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: black;
-    border-radius: 50%;
-}
-
-/* Dice Dot Positions */
-.dice1 .dot { /* Centered dot for dice with 1 dot */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.dice2 .dot { /* Centered dots for dice with 2 dots */
-    top: 20%;
-    left: 20%;
-    transform: translate(-50%, -50%);
-}
-
-.dice2 .dot:nth-child(2) {
-    top: 80%;
-    left: 80%;
-    transform: translate(-50%, -50%);
-}
-
-.dice3 .dot { /* Centered dots for dice with 3 dots */
-    top: 20%;
-    left: 20%;
-    transform: translate(-50%, -50%);
-}
-
-.dice3 .dot:nth-child(2) {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.dice3 .dot:nth-child(3) {
-    top: 80%;
-    left: 80%;
-    transform: translate(-50%, -50%);
-}
-
-.dice4 .dot { /* Centered dots for dice with 4 dots */
-    top: 20%;
-    left: 20%;
-    transform: translate(-50%, -50%);
-}
-
-.dice4 .dot:nth-child(2) {
-    top: 20%;
-    left: 80%;
-    transform: translate(-50%, -50%);
-}
-
-.dice4 .dot:nth-child(3) {
-    top: 80%;
-    left: 20%;
-    transform: translate(-50%, -50%);
-}
-
-.dice4 .dot:nth-child(4) {
-    top: 80%;
-    left: 80%;
-    transform: translate(-50%, -50%);
-}
-
-.dice5 .dot { /* Centered dots for dice with 5 dots */
-    top: 20%;
-    left: 20%;
-    transform: translate(-50%, -50%);
-}
-
-.dice5 .dot:nth-child(2) {
-    top: 20%;
-    left: 80%;
-    transform: translate(-50%, -50%);
-}
-
-.dice5 .dot:nth-child(3) {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.dice5 .dot:nth-child(4) {
-    top: 80%;
-    left: 20%;
-    transform: translate(-50%, -50%);
-}
-
-.dice5 .dot:nth-child(5) {
-    top: 80%;
-    left: 80%;
-    transform: translate(-50%, -50%);
-}
-
-.dice6 .dot { /* Centered dots for dice with 6 dots */
-    top: 20%;
-    left: 20%;
-    transform: translate(-50%, -50%);
-}
-
-.dice6 .dot:nth-child(2) {
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.dice6 .dot:nth-child(3) {
-    top: 20%;
-    left: 80%;
-    transform: translate(-50%, -50%);
-}
-
-.dice6 .dot:nth-child(4) {
-    top: 80%;
-    left: 20%;
-    transform: translate(-50%, -50%);
-}
-
-.dice6 .dot:nth-child(5) {
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.dice6 .dot:nth-child(6) {
-    top: 80%;
-    left: 80%;
-    transform: translate(-50%, -50%);
-}
-
-/* Dice Shake Animation */
-@keyframes shake {
-    0% { transform: rotateX(0) rotateY(0); }
-    25% { transform: rotateX(10deg) rotateY(10deg); }
-    50% { transform: rotateX(-10deg) rotateY(-10deg); }
-    75% { transform: rotateX(10deg) rotateY(10deg); }
-    100% { transform: rotateX(0) rotateY(0); }
-}
-
-/* Additional Styles for Layout and Visibility */
-#result {
-    margin-top: 20px;
-    font-size: 1.2em;
-}
-
-#playersScores, #history {
-    margin-top: 20px;
-    text-align: left;
-}
-
-#resetGameButton {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 1em;
-    background-color: #007bff;
+    background-color: #4CAF50;
     color: white;
+}
+
+header h1 {
+    margin: 0;
+}
+
+#themeToggle {
+    background-color: #ffffff;
     border: none;
-    border-radius: 5px;
+    padding: 10px;
     cursor: pointer;
 }
 
-#resetGameButton:hover {
-    background-color: #0056b3;
+#themeToggle:hover {
+    background-color: #e0e0e0;
 }
+
+#container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#playerSetup, #game {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#playerSetup.hidden, #game.hidden {
+    display: none;
+}
+
 /* Dice Container */
 #diceContainer {
     display: flex;
@@ -222,8 +58,8 @@ h1 {
 
 /* Dice Styles */
 .dice {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -234,39 +70,53 @@ h1 {
     font-size: 24px;
     font-family: Arial, sans-serif;
     text-align: center;
+    border-radius: 5px;
 }
 
 .dot {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     background-color: black;
     border-radius: 50%;
     position: absolute;
 }
 
-.dice1 .dot { top: 25%; left: 25%; }
-.dice2 .dot { top: 15%; left: 15%; }
-.dice2 .dot:nth-child(2) { top: 15%; left: 75%; }
-.dice2 .dot:nth-child(3) { top: 75%; left: 15%; }
-.dice2 .dot:nth-child(4) { top: 75%; left: 75%; }
-.dice3 .dot { top: 15%; left: 15%; }
-.dice3 .dot:nth-child(2) { top: 50%; left: 50%; }
-.dice3 .dot:nth-child(3) { top: 75%; left: 75%; }
-.dice4 .dot:nth-child(1) { top: 15%; left: 15%; }
-.dice4 .dot:nth-child(2) { top: 15%; left: 75%; }
-.dice4 .dot:nth-child(3) { top: 75%; left: 15%; }
-.dice4 .dot:nth-child(4) { top: 75%; left: 75%; }
-.dice5 .dot:nth-child(1) { top: 15%; left: 15%; }
-.dice5 .dot:nth-child(2) { top: 15%; left: 75%; }
-.dice5 .dot:nth-child(3) { top: 50%; left: 50%; }
-.dice5 .dot:nth-child(4) { top: 75%; left: 15%; }
-.dice5 .dot:nth-child(5) { top: 75%; left: 75%; }
-.dice6 .dot:nth-child(1) { top: 15%; left: 15%; }
-.dice6 .dot:nth-child(2) { top: 15%; left: 50%; }
-.dice6 .dot:nth-child(3) { top: 15%; left: 85%; }
-.dice6 .dot:nth-child(4) { top: 85%; left: 15%; }
-.dice6 .dot:nth-child(5) { top: 85%; left: 50%; }
-.dice6 .dot:nth-child(6) { top: 85%; left: 85%; }
+.dot1 { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.dot2 { top: 25%; left: 25%; }
+.dot3 { top: 25%; left: 75%; }
+.dot4 { top: 75%; left: 25%; }
+.dot5 { top: 75%; left: 75%; }
+.dot6 { top: 25%; left: 50%; }
+.dot7 { top: 50%; left: 25%; }
+.dot8 { top: 50%; left: 75%; }
+.dot9 { top: 75%; left: 50%; }
+
+.dice1 .dot { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.dice2 .dot1, .dice2 .dot5 { top: 25%; left: 25%; }
+.dice2 .dot2, .dice2 .dot6 { top: 25%; left: 75%; }
+.dice2 .dot3, .dice2 .dot4 { top: 75%; left: 25%; }
+.dice2 .dot4, .dice2 .dot5 { top: 75%; left: 75%; }
+
+.dice3 .dot1, .dice3 .dot5 { top: 25%; left: 25%; }
+.dice3 .dot2, .dice3 .dot4 { top: 50%; left: 50%; }
+.dice3 .dot3, .dice3 .dot6 { top: 75%; left: 75%; }
+
+.dice4 .dot1, .dice4 .dot2 { top: 25%; left: 25%; }
+.dice4 .dot3, .dice4 .dot4 { top: 25%; left: 75%; }
+.dice4 .dot5, .dice4 .dot6 { top: 75%; left: 25%; }
+.dice4 .dot7, .dice4 .dot8 { top: 75%; left: 75%; }
+
+.dice5 .dot1, .dice5 .dot2 { top: 25%; left: 25%; }
+.dice5 .dot3, .dice5 .dot4 { top: 50%; left: 50%; }
+.dice5 .dot5, .dice5 .dot6 { top: 75%; left: 25%; }
+.dice5 .dot7, .dice5 .dot8 { top: 75%; left: 75%; }
+
+.dice6 .dot1, .dice6 .dot4 { top: 25%; left: 25%; }
+.dice6 .dot2, .dice6 .dot5 { top: 25%; left: 50%; }
+.dice6 .dot3, .dice6 .dot6 { top: 25%; left: 75%; }
+.dice6 .dot7, .dice6 .dot8 { top: 75%; left: 25%; }
+.dice6 .dot9, .dice6 .dot6 { top: 75%; left: 50%; }
+.dice6 .dot10, .dice6 .dot11 { top: 75%; left: 75%; }
 
 .shake {
     animation: shake 0.5s ease;
@@ -280,15 +130,26 @@ h1 {
     100% { transform: rotate(0deg); }
 }
 
-/* Additional Styles */
-#currentPlayer, #playersScores, #history {
-    margin-top: 20px;
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
 }
 
-#currentPlayer, #playersScores, #history {
-    font-family: Arial, sans-serif;
+body.dark-mode header {
+    background-color: #333;
 }
 
-.hidden {
-    display: none;
+body.dark-mode #playerSetup, body.dark-mode #game {
+    background: #1e1e1e;
+    border-color: #444;
+}
+
+body.dark-mode .dice {
+    background-color: #333;
+    border-color: #777;
+}
+
+body.dark-mode .dot {
+    background-color: #e0e0e0;
 }

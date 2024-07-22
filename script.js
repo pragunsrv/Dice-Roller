@@ -37,6 +37,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('resetGameButton').addEventListener('click', function() {
         resetGame();
     });
+
+    document.getElementById('themeToggle').addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+    });
 });
 
 function generatePlayerInputs() {
@@ -45,98 +49,90 @@ function generatePlayerInputs() {
     playerNamesDiv.innerHTML = '';
 
     for (let i = 0; i < numPlayers; i++) {
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.placeholder = `Enter name for Player ${i + 1}`;
-        input.id = `playerName${i + 1}`;
-        playerNamesDiv.appendChild(input);
-        playerNamesDiv.appendChild(document.createElement('br'));
+        playerNamesDiv.innerHTML += `
+            <label for="player${i}">Player ${i + 1} Name:</label>
+            <input type="text" id="player${i}" placeholder="Enter player name">
+        `;
     }
 }
 
 function setupPlayers(numPlayers) {
     players = [];
     for (let i = 0; i < numPlayers; i++) {
-        const playerName = document.getElementById(`playerName${i + 1}`).value.trim();
-        if (playerName) {
-            players.push({ name: playerName, scores: [] });
-        } else {
+        const name = document.getElementById(`player${i}`).value;
+        if (!name) {
             alert('Please enter names for all players.');
             return;
         }
+        players.push({ name, scores: [] });
     }
-    currentPlayerIndex = 0;
-    document.getElementById('game').classList.remove('hidden');
+
     document.getElementById('playerSetup').classList.add('hidden');
+    document.getElementById('game').classList.remove('hidden');
+    document.getElementById('currentPlayer').textContent = `Current Player: ${players[currentPlayerIndex].name}`;
 }
 
 function startGame(numDice, numSides) {
-    createDice(numDice, numSides);
-    updateCurrentPlayer();
-    updateScores();
-    updateHistory();
-}
-
-function createDice(numDice, numSides) {
     const diceContainer = document.getElementById('diceContainer');
     diceContainer.innerHTML = '';
+
     for (let i = 0; i < numDice; i++) {
-        const dice = document.createElement('div');
-        dice.className = `dice dice${numSides}`;
-        diceContainer.appendChild(dice);
+        const die = document.createElement('div');
+        die.classList.add('dice');
+        die.setAttribute('id', `dice${i + 1}`);
+        diceContainer.appendChild(die);
     }
 }
 
 function rollDice() {
-    const dice = document.querySelectorAll('.dice');
-    dice.forEach(die => {
-        const numSides = parseInt(document.getElementById('numSides').value, 10);
-        const result = Math.floor(Math.random() * numSides) + 1;
-        updateDie(die, result);
-        players[currentPlayerIndex].scores.push(result);
-    });
+    const numDice = document.getElementById('diceContainer').children.length;
+    let totalRoll = 0;
 
-    // Move to the next player
-    currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-    updateCurrentPlayer();
-    updateScores();
+    for (let i = 0; i < numDice; i++) {
+        const dice = document.getElementById(`dice${i + 1}`);
+        const roll = Math.floor(Math.random() * 6) + 1; // Roll a die with 6 sides
+        totalRoll += roll;
+        updateDie(dice, roll);
+    }
+
+    const player = players[currentPlayerIndex];
+    player.scores.push(totalRoll);
     updateHistory();
+
+    currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+    document.getElementById('currentPlayer').textContent = `Current Player: ${players[currentPlayerIndex].name}`;
+    updatePlayersScores();
 }
 
-function updateDie(die, result) {
-    die.innerHTML = '';
-    const dotPositions = {
-        1: [[50, 50]],
-        2: [[25, 25], [75, 75]],
-        3: [[25, 25], [50, 50], [75, 75]],
-        4: [[25, 25], [25, 75], [75, 25], [75, 75]],
-        5: [[25, 25], [25, 75], [50, 50], [75, 25], [75, 75]],
-        6: [[25, 25], [25, 50], [25, 75], [75, 25], [75, 50], [75, 75]]
-    };
-
-    dotPositions[result].forEach(position => {
+function updateDie(dice, roll) {
+    dice.innerHTML = '';
+    const dotConfigurations = getDotConfigurations(roll);
+    dotConfigurations.forEach(config => {
         const dot = document.createElement('div');
-        dot.className = 'dot';
-        dot.style.top = `${position[0]}%`;
-        dot.style.left = `${position[1]}%`;
-        die.appendChild(dot);
+        dot.classList.add('dot');
+        dot.classList.add(config);
+        dice.appendChild(dot);
     });
-    
-    die.classList.add('shake');
-    setTimeout(() => die.classList.remove('shake'), 500);
 }
 
-function updateCurrentPlayer() {
-    const currentPlayer = players[currentPlayerIndex];
-    document.getElementById('currentPlayer').textContent = `Current Player: ${currentPlayer.name}`;
+function getDotConfigurations(number) {
+    const configurations = {
+        1: ['dot1'],
+        2: ['dot1', 'dot5'],
+        3: ['dot1', 'dot3', 'dot5'],
+        4: ['dot1', 'dot2', 'dot4', 'dot5'],
+        5: ['dot1', 'dot2', 'dot3', 'dot4', 'dot5'],
+        6: ['dot1', 'dot2', 'dot3', 'dot4', 'dot5', 'dot6']
+    };
+    return configurations[number] || [];
 }
 
-function updateScores() {
-    const scoresDiv = document.getElementById('playersScores');
-    scoresDiv.innerHTML = '<h3>Scores:</h3>';
-    players.forEach(player => {
+function updatePlayersScores() {
+    const playersScoresDiv = document.getElementById('playersScores');
+    playersScoresDiv.innerHTML = '<h3>Players Scores:</h3>';
+    players.forEach((player, index) => {
         const playerScore = player.scores.reduce((a, b) => a + b, 0);
-        scoresDiv.innerHTML += `<p>${player.name}: ${playerScore}</p>`;
+        playersScoresDiv.innerHTML += `<p>${player.name}: ${playerScore}</p>`;
     });
 }
 
